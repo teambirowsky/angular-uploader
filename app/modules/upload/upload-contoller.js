@@ -1,5 +1,5 @@
 angular.module('angular.upload.controllers', [])
-  .controller('uploadController', function ($scope) {
+  .controller('uploadController', ['$scope',function ($scope) {
     $scope.$upload = {};
     $scope.$upload.config = {};
     $scope.$upload.files = [];
@@ -140,4 +140,4 @@ angular.module('angular.upload.controllers', [])
         xhr.abort();
       }
     }
-  });
+  }]);
