@@ -14,4 +14,14 @@ angular.module('angularUploaderApp')
       'AngularJS',
       'Karma'
     ];
+    $scope.uploadInit = {
+      validExt: ['jpg','jpeg','png'],
+      dragStyle:'border:dashed 2px #666;'
+    };
+
+    $scope.uploadFeedback = function(data){
+      document.getElementById('image').width = 700;
+      document.getElementById('image').src = data;
+    }
+
   });

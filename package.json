@@ -1,7 +1,9 @@
 {
   "name": "angularuploader",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "grunt-angular-templates": "^0.5.7"
+  },
   "repository": {},
   "devDependencies": {
     "grunt": "^0.4.5",

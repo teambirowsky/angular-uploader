@@ -12,7 +12,8 @@ angular
   .module('angularUploaderApp', [
     'ngAnimate',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'angular.upload'
   ])
   .config(function ($routeProvider) {
     $routeProvider
