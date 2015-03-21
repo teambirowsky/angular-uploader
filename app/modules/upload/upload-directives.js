@@ -19,40 +19,46 @@ angular.module('angular.upload.directives',[])
       controller:'uploadController'
     }
   }).directive('uploadDrop', function () {
-    function link($scope,element){
-      element.on('dragenter',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        element.attr('style',$scope.$upload.config.dragStyle || '');
-      });
-      element.on('dragover',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        element.attr('style',$scope.$upload.config.dragStyle || '');
-      });
-      element.on('dragleave',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        element.attr('style','');
-      });
-      element.on('drop',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        var files = e.originalEvent.dataTransfer.files;
-        $scope.$upload.prepareFiles(files);
-        $scope.$apply();
-        element.attr('style','');
-      });
-      element.on('dragover',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-      });
+    function compile(tElement, tAttrs, transclude) {
+
+      return function($scope, iElement, iAttrs) {
+        iElement.on('dragenter',function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          iElement.attr('style',$scope.$upload.config.dragStyle || '');
+        });
+        iElement.on('dragover',function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          iElement.attr('style',$scope.$upload.config.dragStyle || '');
+        });
+        iElement.on('dragleave',function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          iElement.attr('style','');
+        });
+        iElement.on('drop',function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          var files = e.originalEvent.dataTransfer.files;
+          $scope.$upload.prepareFiles(files);
+          $scope.$apply();
+          iElement.attr('style','');
+        });
+        iElement.on('dragover',function(e){
+          e.preventDefault();
+          e.stopPropagation();
+        });
+        transclude($scope, function(clone) {
+          iElement.append(clone);
+        });
+      };
     }
+
     return {
       restrict:'A',
       transclude: true,
-      link:link,
-      template:'<ng-transclude></ng-transclude>'
+      compile:compile
     }
   }).directive('uploadBtn', function () {
     function link($scope,element){
