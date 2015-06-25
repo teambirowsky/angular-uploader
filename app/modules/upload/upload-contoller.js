@@ -18,7 +18,8 @@ angular.module('angular.upload.controllers', [])
           },
           ext: $scope.$upload.getExtension(file.name)
         };
-        if (checkDuplicateFiles($scope.$upload.files, f)) {
+        if (checkDuplicateFiles($scope.$upload.files, f) && $scope.$upload.config.checkDuplicate != false) {
+          $scope.uploadFeedback({success: false, errorMsg: "File already added"});
           $scope.$upload.msg = "File already added";
           return;
         }
