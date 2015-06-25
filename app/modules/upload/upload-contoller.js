@@ -28,7 +28,10 @@ angular.module('angular.upload.controllers', [])
             uploadToClient($scope.$upload.files[$scope.$upload.files.length - 1], $scope.$upload.config);
           else sendFilesToServer($scope.$upload.files[$scope.$upload.files.length - 1], $scope.$upload.config);
         }
-        else $scope.$upload.extError = "File extension not allowed! Allowed extensions: " + $scope.$upload.config.validExt.join(', ');
+        else {
+          $scope.uploadFeedback({success: false, errorMsg: "File extension not allowed! Allowed extensions: " + $scope.$upload.config.validExt.join(', ')});
+          $scope.$upload.extError = "File extension not allowed! Allowed extensions: " + $scope.$upload.config.validExt.join(', ');
+        }
       }
     };
     function uploadToClient(file, config) {
@@ -67,7 +70,7 @@ angular.module('angular.upload.controllers', [])
       reader.onload = function (e) {
         file.finished = true;
         file.uploading = false;
-        file.uploadFeedback = $scope.uploadFeedback(e.target.result, file.fileObj);
+        file.uploadFeedback = $scope.uploadFeedback({success: true, result: e.target.result, file: file.fileObj});
         $scope.$apply();
       };
       if($scope.$upload.config.readAsText)
