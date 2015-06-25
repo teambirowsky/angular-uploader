@@ -67,7 +67,7 @@ angular.module('angular.upload.controllers', [])
       reader.onload = function (e) {
         file.finished = true;
         file.uploading = false;
-        file.uploadFeedback = $scope.uploadFeedback(e.target.result);
+        file.uploadFeedback = $scope.uploadFeedback(e.target.result, file.fileObj);
         $scope.$apply();
       };
       if($scope.$upload.config.readAsText)
