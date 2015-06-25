@@ -20,6 +20,7 @@ angular.module('angularUploaderApp')
     };
 
     $scope.uploadFeedback = function(data){
+      console.log(data);
       document.getElementById('image').width = 700;
       document.getElementById('image').src = data;
     }
