@@ -13,7 +13,8 @@ angular.module('angular.upload.directives',[])
       transclude: true,
       scope: {
         uploadInit: '=',
-        uploadFeedback:'=?'
+        uploadFeedback:'=?',
+        $upload: '=?uploadData'
       },
       compile:compile,
       controller:'uploadController'
