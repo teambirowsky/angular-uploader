@@ -2,7 +2,12 @@ angular.module('angular.upload.directives',[])
   .directive('uploadInit', function () {
     function compile(tElement, tAttrs, transclude) {
       return function($scope, iElement, iAttrs) {
-        $scope.$upload.setConfig($scope.uploadInit);
+        $scope.$watch(iAttrs.uploadInit, function (value) {
+          $scope.$upload.setConfig(value);
+        });
+        $scope.$watch(iAttrs.uploadFeedback, function (value) {
+          $scope.$upload.uploadFeedback = value;
+        });
         transclude($scope, function(clone) {
           iElement.append(clone);
         });
@@ -11,11 +16,6 @@ angular.module('angular.upload.directives',[])
     return {
       restrict:'A',
       transclude: true,
-      scope: {
-        uploadInit: '=',
-        uploadFeedback:'=?',
-        $upload: '=?uploadData'
-      },
       compile:compile,
       controller:'uploadController'
     }

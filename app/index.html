@@ -20,12 +20,15 @@
       <img id="image" class="img-thumbnail">
       <div class="panel panel-default" upload-init="uploadInit" upload-feedback="uploadFeedback" upload-data="$upload">
         <div class="dragndrop" upload-drop>
-          <h4>Drag img here</h4>
+          <h4>{{main.uploadText}}</h4>
         </div>
         <button class="btn btn-primary" upload-btn>Upload image</button>
         <div>
           Valid ext {{$upload.config.validExt}}
         </div>
+        <pre>
+          {{$upload}}
+        </pre>
         <div class="progress"></div>
       </div>
 

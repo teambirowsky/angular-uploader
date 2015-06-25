@@ -19,7 +19,7 @@ angular.module('angular.upload.controllers', [])
           ext: $scope.$upload.getExtension(file.name)
         };
         if (checkDuplicateFiles($scope.$upload.files, f) && $scope.$upload.config.checkDuplicate != false) {
-          $scope.uploadFeedback({success: false, errorMsg: "File already added"});
+          $scope.$upload.uploadFeedback({success: false, errorMsg: "File already added"});
           $scope.$upload.msg = "File already added";
           return;
         }
@@ -30,7 +30,7 @@ angular.module('angular.upload.controllers', [])
           else sendFilesToServer($scope.$upload.files[$scope.$upload.files.length - 1], $scope.$upload.config);
         }
         else {
-          $scope.uploadFeedback({success: false, errorMsg: "File extension not allowed! Allowed extensions: " + $scope.$upload.config.validExt.join(', ')});
+          $scope.$upload.uploadFeedback({success: false, errorMsg: "File extension not allowed! Allowed extensions: " + $scope.$upload.config.validExt.join(', ')});
           $scope.$upload.extError = "File extension not allowed! Allowed extensions: " + $scope.$upload.config.validExt.join(', ');
         }
       }
@@ -71,7 +71,8 @@ angular.module('angular.upload.controllers', [])
       reader.onload = function (e) {
         file.finished = true;
         file.uploading = false;
-        file.uploadFeedback = $scope.uploadFeedback({success: true, result: e.target.result, file: file.fileObj});
+        file.uploadFeedback = $scope.$upload.uploadFeedback({success: true, result: e.target.result, file: file.fileObj});
+        $scope.$upload.lastUploaded = e.target.result;
         $scope.$apply();
       };
       if($scope.$upload.config.readAsText)
